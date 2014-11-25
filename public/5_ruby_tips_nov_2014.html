@@ -312,6 +312,35 @@ $ pry-remote
 
 ---
 
+## pry-remote
+
+Dig into those pesky errors, in your console
+
+https://github.com/Mon-Ouie/pry-remote
+
+```ruby
+require 'pry-remote'
+
+class FooController
+  def bar_action
+    binding.remote_pry
+  end
+end
+```
+
+```
+www.wobsite.com/foo/bar_action
+```
+
+```sh
+[pry-remote] Waiting for client on drb://localhost:9876
+$ pry-remote
+```
+
+_Combine with better_errors for even more flexibility in debugging_
+
+---
+
 ## Graphite
 
 Log everything over UDP!
