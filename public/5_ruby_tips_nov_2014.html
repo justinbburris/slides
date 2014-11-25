@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Five Rooby Tips</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(//fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(//fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .large img { width: 20em; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Five Rooby Tips
+
+---
+
+class: center, middle
+
+# Justin Burris
+
+---
+
+class: center, middle
+
+.large[![neo.com](http://neo.com/images/logo-5fdc26a5.svg)]
+
+---
+
+# The Five Tips
+
+1. The Quick Draw
+
+2. The Reductionist
+
+3. The Expressive Reguluar
+
+4. The Exorcist
+
+5. The Hired Gun
+
+---
+
+class: center, middle
+
+# Tip One : The Quick Draw
+
+_ruby 2.0+_
+
+options and keyword arguments
+
+---
+
+## Options arguments
+
+```ruby
+def method_with_many_params(options: {})
+  options[:one_of_many]
+end
+
+method_with_many_params({one_of_many: "one of all",
+                         the_underrated_one: "I'll never be returned"})
+=&gt; "one of all"
+```
+
+---
+
+## Options arguments
+
+```ruby
+def method_with_many_params(options: {})
+  options[:one_of_many]
+end
+
+method_with_many_params({one_of_many: "one of all",
+                         the_underrated_one: "I'll never be returned"})
+=&gt; "one of all"
+```
+
+## Keyword arguments
+
+```ruby
+def method_with_many_params(one_of_many: nil, the_underrated_one: nil)
+  options[:one_of_many]
+end
+
+method_with_many_params({one_of_many: "one of all",
+                         the_underrated_one: "I'll never be returned"})
+=&gt; "one of all"
+```
+
+---
+
+class: center, middle
+
+# Tip Two : The Reductionist
+
+map &amp; reduce
+
+---
+
+## Map
+
+```ruby
+secret_value = 10
+[1,2,3].map do |number|
+  number * secret_value
+end
+
+=&gt; [10,20,30]
+```
+
+---
+
+## Reduce
+
+```ruby
+[1,2,3].reduce(0) |accumulator, number|
+  accumulator + number
+end
+
+=&gt; 6
+```
+
+---
+
+## Reduce
+
+```ruby
+[1,2,3].reduce(0) |accumulator, number|
+  accumulator + number
+end
+
+=&gt; 6
+```
+
+## bonus!
+
+If you have a symbol, reudce is a breeze
+
+```ruby
+[1,2,3].reduce(0, :+)
+
+=&gt; 6
+```
+
+---
+
+class: center, middle
+
+### Map is also known as 
+
+## `collect`
+
+---
+
+class: center, middle
+
+### Reduce is also known as 
+
+## `inject`
+
+---
+
+class: center, middle
+
+# Tip Three : The Expressive Regular
+
+Generate complex regular expressions with less escaping
+
+---
+
+## Using `//` to deliniate a regular expression
+
+```ruby
+/some_text/
+```
+
+---
+
+## Using `//` to deliniate a regular expression
+
+```ruby
+/some_text/
+```
+
+```ruby
+/http:\/\/www.mysite.com\// # ugh what?
+```
+
+---
+
+## Using %r and `{}`
+
+```ruby
+%r{http://mysite.com/} # My sanity, it has returned!
+```
+
+---
+
+class: center, middle
+
+# Tip Four : The Exorcist
+
+daemon and fork
+
+---
+
+## Sending a process to the background
+
+```ruby
+Process.daemon
+```
+
+---
+
+class: center, middle
+
+## But what if you want a PID?
+
+---
+
+## Use Fork!
+
+```ruby
+if pid = fork
+  File.write('/var/run/super_awesome_ruby_program.pid', pid)
+  Process.detach(pid)
+  exit
+end
+```
+
+---
+
+class: center, middle
+
+# Tip Five : The Hired Guns
+
+rubular, pry-remote, graphite, remark.js
+
+---
+
+background-image: url(https://photos-5.dropbox.com/t/1/AABWgv-OkOu8YTgstYe2Fr0rX5eyMkzpq2jDQduJ4y8s8w/12/103454798/png/1024x768/3/1416913200/0/2/Screenshot%202014-11-25%2017.16.33.png/I6m3OGaC5bieE_eb7NtUKTCiyELU9d6AyjxyWrUSQqA)
+
+---
+
+## pry-remote
+
+Dig into those pesky errors, in your console
+
+https://github.com/Mon-Ouie/pry-remote
+
+---
+
+## pry-remote
+
+Dig into those pesky errors, in your console
+
+https://github.com/Mon-Ouie/pry-remote
+
+```ruby
+require 'pry-remote'
+
+class Foo
+  def initialize(x, y)
+    binding.remote_pry
+  end
+end
+
+Foo.new 10, 20
+```
+
+---
+
+## pry-remote
+
+Dig into those pesky errors, in your console
+
+https://github.com/Mon-Ouie/pry-remote
+
+```ruby
+require 'pry-remote'
+
+class Foo
+  def initialize(x, y)
+    binding.remote_pry
+  end
+end
+
+Foo.new 10, 20
+```
+
+```sh
+[pry-remote] Waiting for client on drb://localhost:9876
+$ pry-remote
+```
+
+---
+
+## Graphite
+
+Log everything over UDP!
+
+http://graphite.wikidot.com/
+
+---
+
+## Graphite
+
+Log everything over UDP!
+
+http://graphite.wikidot.com/
+
+__In real time!__
+
+---
+
+## Remark.js
+
+https://github.com/gnab/remark
+
+http://remarkjs.com/
+
+---
+
+class: center, middle
+
+# Twitter : @justinbburris
+
+.large[![twitter.com/justinbburris](https://photos-1.dropbox.com/t/1/AACqIDaunWF1H8L3LlJXEqnr8CuWUd43HxjohZS6RNbQkA/12/103454798/png/32x32/3/_/1/2/Screenshot%202014-11-25%2017.35.54.png/bFL6i3dhljy8s2GtALJdKOEygaM42x1KwUZNba7-TpM?size=1024x768)]
+
+
+---
+
+class: center, middle
+
+# Thanks!
+
+    </textarea>
+    <script src="//gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
