@@ -44,7 +44,7 @@ class: center, middle
 
 2. The Reductionist
 
-3. The Expressive Reguluar
+3. The Expressive Regular
 
 4. The Exorcist
 
@@ -92,7 +92,7 @@ method_with_many_params({one_of_many: "one of all",
 
 ```ruby
 def method_with_many_params(one_of_many: nil, the_underrated_one: nil)
-  options[:one_of_many]
+  one_of_many
 end
 
 method_with_many_params({one_of_many: "one of all",
@@ -272,13 +272,15 @@ https://github.com/Mon-Ouie/pry-remote
 ```ruby
 require 'pry-remote'
 
-class Foo
-  def initialize(x, y)
+class FooController
+  def bar_action
     binding.remote_pry
   end
 end
+```
 
-Foo.new 10, 20
+```
+www.wobsite.com/foo/bar_action
 ```
 
 ---
@@ -292,13 +294,15 @@ https://github.com/Mon-Ouie/pry-remote
 ```ruby
 require 'pry-remote'
 
-class Foo
-  def initialize(x, y)
+class FooController
+  def bar_action
     binding.remote_pry
   end
 end
+```
 
-Foo.new 10, 20
+```
+www.wobsite.com/foo/bar_action
 ```
 
 ```sh
