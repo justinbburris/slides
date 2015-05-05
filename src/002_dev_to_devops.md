@@ -7,7 +7,6 @@ footer: ![inline](images/twitter_logo_blue.png) *@justinbburris*
 
 ---
 
-
 ![](images/me_large.jpg)
 
 # Justin Burris
